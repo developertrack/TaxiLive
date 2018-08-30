@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_marker"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_markerhome"
+        android:gravity="center_vertical|center_horizontal"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/space20">
+
+            <View
+                android:id="@+id/dot_marker"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/dot_pickup" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space10"
+                android:layout_toRightOf="@id/dot_marker"
+                android:text="Set Pickup Location"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/bottom_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_request"
+                style="@style/ButtonOrange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:text="Request" />
+
+            <Button
+                android:id="@+id/bt_request_later"
+                style="@style/ButtonBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/bt_request"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:text="Later" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@+id/toolbar">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/rl_bottom"
+            android:layout_below="@id/toolbar" />
+
+        <LinearLayout
+            android:id="@+id/locationMarker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageMarker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add_marker" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Address"
+                style="@style/TextView14spBlackPad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/m_left_right"
+                android:singleLine="true"
+                android:text="Pickup Address" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignLeft="@id/Address"
+                android:layout_alignRight="@id/Address"
+                android:layout_below="@id/Address"
+                android:background="@color/separator" />
+
+            <TextView
+                android:id="@+id/tv_dropoff"
+                style="@style/TextView14spGrayPad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/separator"
+                android:layout_marginLeft="@dimen/m_left_right"
+                android:singleLine="true"
+                android:text="Drop off Address" />
+
+            <LinearLayout
+                android:layout_width="@dimen/m_left_right"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/Address"
+                android:layout_alignTop="@id/Address"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/dot_pickup"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_pickup" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_dropofff"
+                android:layout_width="@dimen/m_left_right"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_dropoff"
+                android:layout_alignTop="@id/tv_dropoff"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/dot_dropoff"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_dropoff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_dropoff"
+                android:background="@drawable/bg_white_top_border"
+                android:orientation="horizontal"
+                android:weightSum="3"></LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_form"
+                android:background="@drawable/bg_white_top_border"
+                android:paddingLeft="@dimen/space10"
+                android:paddingRight="@dimen/space10"></RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

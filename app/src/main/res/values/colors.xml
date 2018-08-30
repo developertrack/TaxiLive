@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFCB09</color>
+    <color name="colorPrimaryDark">#FFCB09</color>
+    <color name="colorAccent">#FFCB09</color>
+
+    <color name="colorPrimaryTrans">#a0673AB7</color>
+    <color name="colorAccentTrans">#a0009688</color>
+    <color name="colorBlackTrans">#a0000000</color>
+    <color name="appbackground">#FFCB09</color>
+    <color name="edittext_floating">#B0BEC5</color>
+    <color name="dark_grey">#515151</color>
+    <color name="half_white">#edf3ec</color>
+    <color name="separator">#D0D4D9</color>
+</resources>
