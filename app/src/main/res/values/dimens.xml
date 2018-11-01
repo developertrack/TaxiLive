@@ -57,6 +57,8 @@
     <dimen name="space20">20dp</dimen>
     <dimen name="m_left_right">40dp</dimen>
     <dimen name="dots_height">30dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
 
 
 </resources>

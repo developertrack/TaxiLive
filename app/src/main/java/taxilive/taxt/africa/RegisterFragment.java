@@ -46,6 +46,8 @@ public class RegisterFragment extends Fragment {
     DotsProgressBar progressBar;
     private EditText first_name, last_name, email, mobnumber, province, password, cpassword;
     private TextInputLayout input_layout_province, input_layout_mobnumber, input_layout_email, input_layout_last_name, input_layout_fname, input_layout_password, input_layout_cpassword;
+    String fname,lname,res_email,customer_id,customer_wallet;
+
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -167,6 +169,7 @@ public class RegisterFragment extends Fragment {
             jsonBody.put("regfrom", "app");
 
 
+
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                     UrlConstant.REGISTRATION_URL, jsonBody,
                     new Response.Listener<JSONObject>() {
@@ -178,7 +181,7 @@ public class RegisterFragment extends Fragment {
                                 String Status = response.getString("result");
                                 final String message = response.getString("message").toString();
 
-                                final JSONObject customer_data = response.getJSONObject("customer_profile");
+
 
                                 if (Status.equals("success")) {
 
@@ -186,7 +189,13 @@ public class RegisterFragment extends Fragment {
                                         @Override
                                         public void run() {
                                             try {
+                                                final JSONObject customer_data = response.getJSONObject("customer_profile");
                                                 mobile_no = customer_data.getString("mobile");
+                                                fname=customer_data.getString("first_name");
+                                                lname=customer_data.getString("last_name");
+                                                res_email=customer_data.getString("email");
+                                                customer_id=response.getString("customer_id");
+                                                customer_wallet=response.getString("customer_wallet");
                                                 generateOtp(mobile_no);
                                             } catch (Exception e) {
 
@@ -223,16 +232,16 @@ public class RegisterFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.e(tag_json_obj, "Error: " + error.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
-                            dlgAlert.setMessage("Error while fetching data, please try again");
-                            dlgAlert.setPositiveButton("OK", null);
-                            dlgAlert.setCancelable(true);
-                            dlgAlert.create().show();
-                        }
-                    });
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
+//                            dlgAlert.setMessage("Error while fetching data, please try again");
+//                            dlgAlert.setPositiveButton("OK", null);
+//                            dlgAlert.setCancelable(true);
+//                            dlgAlert.create().show();
+//                        }
+//                    });
                     progressBar.stop();
                     progressBar.setVisibility(View.GONE);
                 }
@@ -283,6 +292,11 @@ public class RegisterFragment extends Fragment {
                                                 Intent sign_up = new Intent(getActivity(), Phoneverification.class);
                                                 sign_up.putExtra("otp", otp);
                                                 sign_up.putExtra("mobile", mobile_no);
+                                                sign_up.putExtra("first_name",fname);
+                                                sign_up.putExtra("last_name",lname);
+                                                sign_up.putExtra("email",res_email);
+                                                sign_up.putExtra("customer_id",customer_id);
+                                                sign_up.putExtra("customer_wallet",customer_wallet);
                                                 startActivity(sign_up);
                                             } catch (Exception e) {
 
@@ -294,16 +308,16 @@ public class RegisterFragment extends Fragment {
                                     });
 
                                 } else {
-                                    getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
-                                            dlgAlert.setMessage(message);
-                                            dlgAlert.setPositiveButton("OK", null);
-                                            dlgAlert.setCancelable(true);
-                                            dlgAlert.create().show();
-                                        }
-                                    });
+//                                    getActivity().runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
+//                                            dlgAlert.setMessage(message);
+//                                            dlgAlert.setPositiveButton("OK", null);
+//                                            dlgAlert.setCancelable(true);
+//                                            dlgAlert.create().show();
+//                                        }
+//                                    });
 
                                 }
 

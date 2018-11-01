@@ -73,5 +73,12 @@
         <item name="android:paddingBottom">@dimen/space15</item>
     </style>
 
+    <style name="TextView12spGrayPad">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:paddingTop">@dimen/space5</item>
+        <item name="android:paddingBottom">@dimen/space5</item>
+    </style>
 
 </resources>

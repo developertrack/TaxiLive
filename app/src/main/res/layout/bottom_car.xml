@@ -28,6 +28,7 @@
                 android:padding="2dp">
 
                 <TextView
+                    android:id="@+id/txt_micro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -59,10 +60,11 @@
                 android:padding="2dp">
 
                 <TextView
+                    android:id="@+id/txt_mini"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="1 Min."
+                    android:text="No Cabs"
                     android:textSize="9sp" />
 
                 <ImageView
@@ -90,10 +92,11 @@
                 android:padding="2dp">
 
                 <TextView
+                    android:id="@+id/txt_sedan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="1 Min."
+                    android:text="No Cabs"
                     android:textSize="9sp" />
 
                 <ImageView
@@ -121,10 +124,11 @@
                 android:padding="2dp">
 
                 <TextView
+                    android:id="@+id/txt_rental"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="1 Min."
+                    android:text="No Cabs"
                     android:textSize="9sp" />
 
                 <ImageView
@@ -152,10 +156,11 @@
                 android:padding="2dp">
 
                 <TextView
+                    android:id="@+id/txt_luxury"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="1 Min."
+                    android:text="No Cabs"
                     android:textSize="9sp" />
 
                 <ImageView

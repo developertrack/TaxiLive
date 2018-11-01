@@ -42,8 +42,9 @@ public class Phoneverification extends AppCompatActivity {
     TextView counter, resend, mob_text;
     ProgressDialog pDialog;
     Button btn_confirm, btn_previous;
-    Intent intent;
+    Intent getdata;
     String tag_json_obj = "MessageVerificationActivity_TAG";
+    String fname,lname,res_email,customer_id,customer_wallet;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -69,9 +70,15 @@ public class Phoneverification extends AppCompatActivity {
         btn_previous = findViewById(R.id.btn_previous);
         btn_confirm = findViewById(R.id.btn_confirm);
 
-        intent = getIntent();
-        OTP = intent.getStringExtra("otp");
-        MobileNumber = intent.getStringExtra("mobile");
+        getdata = getIntent();
+        OTP = getdata.getStringExtra("otp");
+        MobileNumber = getdata.getStringExtra("mobile");
+        fname=getdata.getStringExtra("first_name");
+        lname=getdata.getStringExtra("last_name");
+        res_email=getdata.getStringExtra("email");
+        customer_id=getdata.getStringExtra("customer_id");
+        customer_id=getdata.getStringExtra("customer_id");
+        customer_wallet=getdata.getStringExtra("customer_wallet");
 
         mob_text.setText("You will receive an one time password on your mobile number " + MobileNumber);
         input_otp.setText(OTP);
@@ -147,8 +154,13 @@ public class Phoneverification extends AppCompatActivity {
                                         public void run() {
 
                                             try {
-                                                Intent sign_up = new Intent(Phoneverification.this, HomeScreen.class);
+                                                Intent sign_up = new Intent(Phoneverification.this, LandingNavigation.class);
                                                 sign_up.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                sign_up.putExtra("first_name",fname);
+                                                sign_up.putExtra("last_name",lname);
+                                                sign_up.putExtra("email",res_email);
+                                                sign_up.putExtra("customer_id",customer_id);
+                                                sign_up.putExtra("customer_wallet",customer_wallet);
                                                 startActivity(sign_up);
                                             } catch (Exception e) {
 
@@ -183,16 +195,18 @@ public class Phoneverification extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.e(tag_json_obj, "Error: " + error.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(Phoneverification.this);
-                            dlgAlert.setMessage("Error while fetching data, please try again");
-                            dlgAlert.setPositiveButton("OK", null);
-                            dlgAlert.setCancelable(true);
-                            dlgAlert.create().show();
-                        }
-                    });
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(Phoneverification.this);
+//                            dlgAlert.setMessage("Error while fetching data, please try again");
+//                            dlgAlert.setPositiveButton("OK", null);
+//                            dlgAlert.setCancelable(true);
+//                            dlgAlert.create().show();
+//                        }
+//                    });
+                    verifyUser();
+
                     pDialog.hide();
                 }
             }) {

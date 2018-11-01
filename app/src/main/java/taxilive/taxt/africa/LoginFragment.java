@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment {
     Button btn_next;
     EditText mob_no, password;
     TextInputLayout input_layout_mobnumber, input_layout_password;
-    String str_mobnumber, str_password;
+    String str_mobnumber, str_password,id;
     String tag_json_obj = "json_obj_req";
 
     DotsProgressBar progressBar;
@@ -127,19 +127,22 @@ public class LoginFragment extends Fragment {
                                 String Status = response.getString("result");
                                 final String message = response.getString("message").toString();
 
-                                final JSONObject customer_data = response.getJSONObject("customer_profile");
-
                                 if (Status.equals("success")) {
-
-                                    Intent i = new Intent(getActivity(), HomeScreen.class);
-                                    startActivity(i);
+                                    final JSONObject customer_data = response.getJSONObject("customer_profile");
+                                    Intent home = new Intent(getActivity(), LandingNavigation.class);
+                                    home.putExtra("first_name",customer_data.getString("first_name"));
+                                    home.putExtra("last_name",customer_data.getString("last_name"));
+                                    home.putExtra("email",customer_data.getString("email"));
+                                    home.putExtra("customer_id",response.getString("customer_id"));
+                                    home.putExtra("customer_wallet",response.getString("customer_wallet"));
+                                    startActivity(home);
 
                                 } else {
                                     getActivity().runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
-                                            dlgAlert.setMessage(message);
+                                            dlgAlert.setMessage("Please check your credentials");
                                             dlgAlert.setPositiveButton("OK", null);
                                             dlgAlert.setCancelable(true);
                                             dlgAlert.create().show();
@@ -160,18 +163,10 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.e(tag_json_obj, "Error: " + error.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            android.support.v7.app.AlertDialog.Builder dlgAlert = new android.support.v7.app.AlertDialog.Builder(getActivity());
-                            dlgAlert.setMessage("Error while fetching data, please try again");
-                            dlgAlert.setPositiveButton("OK", null);
-                            dlgAlert.setCancelable(true);
-                            dlgAlert.create().show();
-                        }
-                    });
+
                     progressBar.stop();
                     progressBar.setVisibility(View.GONE);
+                    userLogin();
                 }
             }) {
                 @Override
